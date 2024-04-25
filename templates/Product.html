@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amazon | Product Page</title>
+    <style>
+		body {
+    font-family: sans-serif;
+}
+
+#product-info {
+    display: flex;
+    width: 95%;
+    margin: 0 auto
+}
+
+.item-image-parent {
+    order: 1;
+    width: 50%;
+    display: flex;
+}
+
+.item-info-parent {
+    order: 2;
+    width: 50%;
+}
+
+.item-list-vertical {
+    order: 1;
+    width: 10%;
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.item-image-main {
+    order: 2;
+    width: 90%;
+    height: 100%;
+}
+
+/* sectioning completed */
+
+
+.thumb-box {
+    width: 75%;
+    margin: 10px auto;
+    background: white;
+    border: 1px solid gray;
+}
+.thumb-box img {
+    width: 100%;
+    height: 100%;
+}
+
+.item-image-main img {
+    width: 80%;
+    height: auto;
+}
+
+.thumb-box:hover {
+    cursor: pointer;
+    border-color: #e77600;;
+    box-shadow: 0px 1px 5px 1px #e77600;
+}
+
+/* Item Info */
+.main-info h4{
+    font-size: 21px;
+    margin-bottom: 0;
+    font-weight: 400
+}
+
+.star-rating {
+    width: 70%;
+    color: gray;
+    font-size: 24px;
+    border-bottom: 0.4px solid rgba(194, 194, 194, 0.829);
+}
+
+.star-rating span {
+    color: gold;
+}
+
+.main-info p {
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 30px;
+}
+
+#price {
+    color: rgb(168, 14, 14);
+    font-size: 21px;
+}
+
+/* Select Items */
+
+.change-color {
+    margin-bottom: 10px;
+}
+
+.change-color .thumb-box{
+    margin: 10px 10px 10px 0;
+    width: 40px;
+    display: inline-block;
+}
+
+.change-size select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border-color: rgb(189, 189, 189);
+    margin-top: 10px;
+}
+
+.description ul {
+    padding-left: 17px;
+    font-size: 15px;
+    line-height: 1.3rem;
+}
+        .add-to-cart-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffa500; /* Orange background color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 500px; /* Set width to auto to fit the content */
+    text-align: center; /* Center the text horizontally */
+    margin-top: 20px;
+}
+        .center-container {
+    text-align: center; /* Center the contents of this container horizontally */
+    margin-top: 20px;
+}
+
+	</style>
+</head>
+<body>
+
+
+    <section id="product-info" style="margin-top:30px;">
+
+
+            <div class="item-image-main">
+                <img src="{{product.image.url}}" alt="default" />
+            </div>
+        </div>
+
+        <div class="item-info-parent">
+            <!-- main info -->
+            <div class="main-info">
+                <h4 style="line-height: 1.5;">{{product.name}}</h4>
+
+                <p>Price: <span id="price">₹ {{product.price}} Rs</span></p>
+            </div>
+            <!-- Choose -->
+
+
+
+
+                <div class="description">
+                    <ul>
+                        <li><b>{{ product.stock}} stocks available</b></li>
+                        <li style="margin-top:20px;line-height: 1.5;"><b>{{product.description}}</b></li>
+
+                    </ul>
+                </div>
+        <div class="center-container">
+      <a href="{% url 'addcart' product.id %}" class="add-to-cart-link">Add to Cart</a>
+      <a href="{{ product.get_url }}" class="add-to-cart-link" style="background-color:Green;">Buy Now</a>
+        </div>
+
+            </div>
+            <!-- Description -->
+
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

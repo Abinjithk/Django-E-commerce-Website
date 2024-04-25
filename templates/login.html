@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<Html>
+<head>
+<title>
+Login page
+</title>
+    <style>
+    .form-container {
+        width: 300px; /* Set the width of the form container */
+        margin: 0 auto; /* Center the form container horizontally */
+        margin-top: 100px; /* Adjust as needed for vertical alignment */
+    }
+        h1{
+        margin-bottom:20px;
+        text-align:center;
+        color:green;
+        font-size:30px;
+        }
+        .btn{
+        display: block; /* Make the button a block element */
+        margin: 20px auto;
+        }
+</style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Login Page</h1>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+        <label> Username: </label> <br>
+        <input type="text" name="Username"/> <br>
+        <label>Password:</label><br>
+        <input type="Password" id="pass" name="password"> <br>
+        <input type="submit" value="Login" class="btn"/>
+    </form>
+    <a href="{% url 'register' %}">New User? Register Here</a>
+</div>
+</body>
+</html>
+{% endblock %}

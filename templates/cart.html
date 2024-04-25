@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for i in cart_items %}
+<div class="cart" style="width:500px;">
+
+        <div class="cart-item">
+            <div class="item-details">
+                <a href="{{i.product.get_url}}"><img src="{{i.product.image.url}}" alt="{{i.product.name}}" style="height:100px;width:100px;"></a>
+                <div class="item-info">
+                    <a href="{{i.product.get_url}}"><h4 style="margin-right: 30px;">{{i.product.name | truncatewords:3}}</h4></a>
+                    <p style="margin-right: 30px;">{{i.product.description|truncatewords:10}}</p>
+                    <p style="margin-right: 30px;"><b>Product Id</b> : {{i.product.id}}</p>
+                    <p style="margin-right: 30px;"><b>Price</b> : {{i.product.price}} Rs</p>
+                    <p style="margin-right: 30px;"><b>Total Price</b> : {{i.total}} Rs</p>
+                    <a href= "{% url 'deletecart' i.product.id %}" style="background-color: red;">Delete</a>
+                </div>
+            </div>
+            <div class="quantity">
+                <a href="{% url 'mincart' i.product.id %}" class="quantity-btn">-</a>
+                <input type="text" class="quantity-input" value={{i.quantity}}>
+                <a href= "{% url 'addcart' i.product.id %}" class="quantity-btn">+</a>
+            </div>
+            
+        </div>
+
+</div>
+{% endfor %}
+{% if cart_items %}
+    <h3 style="text-align: center; font-weight: bold;">Total amount for all items {{ total }}</h3>
+{% endif %}
+{% endblock %}
