@@ -43,7 +43,7 @@ def product_details(request, c_slug, p_slug):
 
     except Exception as e:
         raise e
-    return render(request, 'product.html', {'product': product, 'category': category})
+    return render(request, 'Product.html', {'product': product, 'category': category})
 
 
 def search(request):
@@ -84,7 +84,7 @@ def cart(request, total=0, count=0, ct_items=None):
         pass
     return render(request, 'cart.html', {'cart_items': ct_items, 'total': total, 'count': count, 'category': category})
 
-
+@login_required
 def add_cart(request, product_id):
     product = Products.objects.get(id=product_id)
     try:
